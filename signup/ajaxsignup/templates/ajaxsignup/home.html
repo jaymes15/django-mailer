@@ -1,0 +1,11 @@
+<h1>Welcome send your mail below</h1>
+{{ request.user.email }}
+
+<form action="{% url 'ajaxsignup:logout' %}" method='POST'>
+                    {% csrf_token %}
+                <button type='submit' class="btn btn-outline-success" type="button">Log Out&ensp;</button>
+                
+  
+              </form>
+
+<a href ='{% url "ajaxsignup:sendmail" %}'>Send mail</a>
