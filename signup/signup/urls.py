@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url('^reset-password/$', PasswordResetView.as_view(), name='reset_password'),
+    url('^reset-password/done/$', PasswordResetDoneView.as_view(), name='password_reset_done'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',PasswordResetConfirmView.as_view(),name="password_reset_confirm"),
+    path('password/done',PasswordResetCompleteView.as_view(),name="password_reset_complete"),
     path('signup/',include('ajaxsigniing.urls')),
     path('',include('ajaxsignup.urls')),
 ]
